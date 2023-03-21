@@ -1,0 +1,22 @@
+{
+  "name": "e-menu-api",
+  "version": "1.0.0",
+  "description": "personal project to study API REST",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.36.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "nodemon": "^2.0.21",
+    "sucrase": "^3.30.0"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

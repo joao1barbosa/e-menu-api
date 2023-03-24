@@ -14,7 +14,7 @@ model User {
   email          String    @unique
   password       String
   passwordHash   String
-  Product        Product[]
+  Products       Product[]
   updateAt       DateTime  @updatedAt
   createdAt      DateTime  @default(now())
 }

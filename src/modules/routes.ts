@@ -4,7 +4,7 @@ import { UserRouter } from './user/router';
 
 const routes = Router();
 
-routes.use('/product', ProductRouter);
+// routes.use('/product', ProductRouter);
 routes.use('/user', UserRouter);
 
-export default { routes };
+export default routes;

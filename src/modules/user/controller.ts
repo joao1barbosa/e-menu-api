@@ -1,5 +1,6 @@
-import { PrismaClient } from '@prisma/client';
 import { Request, Response, NextFunction } from 'express';
+import { PrismaClient } from '@prisma/client';
+import { errorHandler } from '../errors';
 import bcryptjs from 'bcryptjs';
 
 const prisma = new PrismaClient();
@@ -33,8 +34,10 @@ export const createUser = async (
       name: result.name,
       restaurantName: result.restaurantName,
       email: result.email });
-  } catch (error) {
-    return next(error);
+  } catch (e) {
+    return res.status(400).json({
+      errors: errorHandler(e),
+    });
   }
 };
 
@@ -54,14 +57,20 @@ export const getUserbyId = async (
 
     const statusCode = result ? 200 : 404;
 
-    return res.status(statusCode).json(result ? {
-      id: result.id,
-      name: result.name,
-      restaurantName: result.restaurantName,
-      email: result.email }
-    : null);
-  } catch (error) {
-    return next(error);
+    return res.status(statusCode).json(result
+    ?
+      {
+        id: result.id,
+        name: result.name,
+        restaurantName: result.restaurantName,
+        email: result.email
+      }
+    :
+      { erros : "Usuário não existe" });
+  } catch (e) {
+    return res.status(400).json({
+      errors: errorHandler(e),
+    });
   }
 };
 
@@ -85,9 +94,22 @@ export const updateUser = async (
       },
     });
 
-    return res.status(200).json(result);
-  } catch (error) {
-    return next(error);
+    const statusCode = result ? 200 : 404;
+
+    return res.status(statusCode).json(result
+      ?
+        {
+          id: result.id,
+          name: result.name,
+          restaurantName: result.restaurantName,
+          email: result.email
+        }
+      :
+        { erros : "Usuário não existe" });
+  } catch (e) {
+    return res.status(400).json({
+      errors: e,
+    });
   }
 };
 
@@ -105,8 +127,21 @@ export const deleteUser = async (
       },
     });
 
-    return res.status(200).json(result);
-  } catch (error) {
-    return next(error);
+    const statusCode = result ? 200 : 404;
+
+    return res.status(statusCode).json(result
+      ?
+        {
+          id: result.id,
+          name: result.name,
+          restaurantName: result.restaurantName,
+          email: result.email
+        }
+      :
+        { erros : "Usuário não existe" });
+  } catch (e) {
+    return res.status(400).json({
+      errors: e,
+    });
   }
 };

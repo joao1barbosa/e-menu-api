@@ -7,7 +7,7 @@ export const createUserValidation = z.object({
     restaurantName: z.string()
       .min(3, { message: "Nome do restaurante muito curto" }),
     email: z.string()
-      .email(),
+      .email({ message: "Email inválido" }),
     password: z.string()
       .min(6, { message: "Senha deve ter entre 6 e 20 caracteres" })
       .max(20, { message: "Senha deve ter entre 6 e 20 caracteres" }),
@@ -32,7 +32,7 @@ export const updateUserValidation = z.object({
       .min(3, { message: "Nome do restaurante muito curto" })
       .optional(),
     email: z.string()
-      .email()
+      .email({ message: "Email inválido" })
       .optional(),
     password: z.string()
       .min(6, { message: "Senha deve ter entre 6 e 20 caracteres" })

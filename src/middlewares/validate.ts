@@ -1,4 +1,5 @@
 import { AnyZodObject } from 'zod';
+import { errorHandler } from '../modules/errors';
 
 export const validate = (schema: AnyZodObject) => {
   return (req, res, next) => {
@@ -10,8 +11,10 @@ export const validate = (schema: AnyZodObject) => {
       });
 
       next();
-    } catch (error: any) {
-      return res.status(400).send(error.errors);
+    } catch (e) {
+      return res.status(400).json({
+        errors: errorHandler(e),
+      });
     }
   };
 };

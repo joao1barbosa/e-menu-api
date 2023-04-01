@@ -26,13 +26,17 @@ export const updateUserValidation = z.object({
   }),
   body: z.object({
     name: z.string()
-      .min(3, { message: "Nome muito curto" }),
+      .min(3, { message: "Nome muito curto" })
+      .optional(),
     restaurantName: z.string()
-      .min(3, { message: "Nome do restaurante muito curto" }),
+      .min(3, { message: "Nome do restaurante muito curto" })
+      .optional(),
     email: z.string()
-      .email(),
+      .email()
+      .optional(),
     password: z.string()
       .min(6, { message: "Senha deve ter entre 6 e 20 caracteres" })
-      .max(20, { message: "Senha deve ter entre 6 e 20 caracteres" }),
+      .max(20, { message: "Senha deve ter entre 6 e 20 caracteres" })
+      .optional(),
   }),
 });

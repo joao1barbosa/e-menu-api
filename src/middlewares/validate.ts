@@ -13,7 +13,7 @@ export const validate = (schema: AnyZodObject) => {
       next();
     } catch (e) {
       return res.status(400).json({
-        errors: errorHandler(e),
+        errors: errorHandler(e.errors[0]),
       });
     }
   };

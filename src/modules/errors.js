@@ -7,6 +7,10 @@ export const errorHandler = (error) => {
     }
   }
 
+  if (error.code === 'P2025') {
+    return 'Usuário não encontrado';
+  }
+
   if (error.code === 'invalid_string') {
     console.log(error.path);
     if (error.path[1] === 'email') {

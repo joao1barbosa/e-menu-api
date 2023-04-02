@@ -18,5 +18,7 @@ module.exports = {
     quotes: 'off',
     'import/extensions': 'off',
     'import/no-unresolved': 'off',
+    'nonblock-statement-body-position': 'off',
+    curly: 'off',
   },
 };

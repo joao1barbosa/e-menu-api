@@ -29,11 +29,13 @@ export const createUser = async (
       },
     });
 
-    return res.status(201).json({
-      id: result.id,
-      name: result.name,
-      restaurantName: result.restaurantName,
-      email: result.email });
+    return res.status(201).json(
+      {
+        id: result.id,
+        name: result.name,
+        restaurantName: result.restaurantName,
+        email: result.email
+      });
   } catch (e) {
     return res.status(400).json({
       errors: errorHandler(e),
@@ -66,7 +68,7 @@ export const getUserbyId = async (
         email: result.email
       }
     :
-      { erros : "Usuário não existe" });
+      null);
   } catch (e) {
     return res.status(400).json({
       errors: errorHandler(e),
@@ -94,21 +96,16 @@ export const updateUser = async (
       },
     });
 
-    const statusCode = result ? 200 : 404;
-
-    return res.status(statusCode).json(result
-      ?
-        {
-          id: result.id,
-          name: result.name,
-          restaurantName: result.restaurantName,
-          email: result.email
-        }
-      :
-        { erros : "Usuário não existe" });
+    return res.status(200).json(
+      {
+        id: result.id,
+        name: result.name,
+        restaurantName: result.restaurantName,
+        email: result.email
+      });
   } catch (e) {
     return res.status(400).json({
-      errors: e,
+      errors: errorHandler(e),
     });
   }
 };
@@ -127,21 +124,16 @@ export const deleteUser = async (
       },
     });
 
-    const statusCode = result ? 200 : 404;
-
-    return res.status(statusCode).json(result
-      ?
-        {
-          id: result.id,
-          name: result.name,
-          restaurantName: result.restaurantName,
-          email: result.email
-        }
-      :
-        { erros : "Usuário não existe" });
+    return res.status(200).json(
+      {
+        id: result.id,
+        name: result.name,
+        restaurantName: result.restaurantName,
+        email: result.email
+      });
   } catch (e) {
     return res.status(400).json({
-      errors: e,
+      errors: errorHandler(e),
     });
   }
 };

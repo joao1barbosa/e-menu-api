@@ -68,7 +68,9 @@ export const getUserbyId = async (
         email: result.email
       }
     :
-      null);
+    {
+      errors: 'Usuário não encontrado',
+    });
   } catch (e) {
     return res.status(400).json({
       errors: errorHandler(e),

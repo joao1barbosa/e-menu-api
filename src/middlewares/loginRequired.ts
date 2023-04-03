@@ -2,10 +2,15 @@ import { Request, Response, NextFunction } from 'express';
 import { PrismaClient } from '@prisma/client';
 import jwt from 'jsonwebtoken';
 
+interface RequestWithUserData extends Request {
+  userId?: string;
+  userEmail?: string;
+}
+
 const prisma = new PrismaClient();
 
 export const loginRequired = async (
-  req: Request,
+  req: RequestWithUserData,
   res: Response,
   next: NextFunction
 ) => {
@@ -36,14 +41,8 @@ export const loginRequired = async (
       });
     }
 
-    /*
-      A ideia é atrelar o id e o email
-      autenticados pelo token à requisição,
-      porém o typescript acusa que esses atributos
-      não existem na req. Irei consertar isto posteriormente
-    */
-    // req.userId = id;
-    // req.userEmail = email;
+    req.userId = id;
+    req.userEmail = email;
 
     return next();
   } catch (e) {

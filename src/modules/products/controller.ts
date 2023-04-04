@@ -51,6 +51,11 @@ export const listProductByRestaurant = async (
       },
     });
 
+    if (result === null){
+    return res.status(404).json({
+      errors: 'Nenhum produto encontrado para este Restaurante',
+    });
+    }
     if (result !== null){
       const productsList = result.map((obj) => {
         return {
@@ -64,12 +69,22 @@ export const listProductByRestaurant = async (
       return res.status(200).json(productsList);
     }
 
-    return res.status(404).json({
-      errors: 'Nenhum produto encontrado para este Restaurante',
-    });
   } catch (e) {
     return res.status(400).json({
       errors: errorHandler(e),
     });
   }
+};
+
+export const updateProduct = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+
+  const { id } = req.params;
+  const {
+    name, description, price, restaurantID
+  } = req.body;
+
 };

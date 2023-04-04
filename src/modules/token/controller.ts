@@ -29,24 +29,26 @@ export const createToken = async (
         email: email,
       }
     });
-    if (result !== null){
-      if (!(await passwordIsValid(password, result.passwordHash))) {
-        return res.status(401).json({
-          errors: 'Senha inválida',
-        })
-      }
 
-      const id = result.id;
-      const token = jwt.sign({ id, email }, process.env.TOKEN_SECRET, {
-        expiresIn: process.env.TOKEN_EXPIRATION,
-      });
-
-      return res.status(200).json({ token });
-    }else{
+    if (result === null){
       return res.status(404).json({
         errors: 'Usuário não existe'
+      });
+    }
+
+    if (!(await passwordIsValid(password, result.passwordHash))) {
+      return res.status(401).json({
+        errors: 'Senha inválida',
       })
     }
+
+    const id = result.id;
+    const token = jwt.sign({ id, email }, process.env.TOKEN_SECRET, {
+      expiresIn: process.env.TOKEN_EXPIRATION,
+    });
+
+    return res.status(200).json({ token });
+
   } catch (e) {
     return res.status(400).json({
       errors: errorHandler(e),

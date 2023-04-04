@@ -98,13 +98,13 @@ export const updateUser = async (
       },
     });
 
-    return res.status(200).json(
-      {
-        id: result.id,
-        name: result.name,
-        restaurantName: result.restaurantName,
-        email: result.email
-      });
+    return res.status(200).json({
+      id: result.id,
+      name: result.name,
+      restaurantName: result.restaurantName,
+      email: result.email
+    });
+
   } catch (e) {
     return res.status(400).json({
       errors: errorHandler(e),
@@ -126,13 +126,12 @@ export const deleteUser = async (
       },
     });
 
-    return res.status(200).json(
-      {
-        id: result.id,
-        name: result.name,
-        restaurantName: result.restaurantName,
-        email: result.email
-      });
+    return res.status(200).json({
+      id: result.id,
+      name: result.name,
+      restaurantName: result.restaurantName,
+      email: result.email,
+    });
   } catch (e) {
     return res.status(400).json({
       errors: errorHandler(e),

@@ -84,7 +84,7 @@ export const updateUser = async (
   next: NextFunction
  ) => {
   const { id } = req.params;
-  const { name, restaurantName, email } = req.body;
+  const { name, restaurantName, email, password} = req.body;
 
   try {
     const result = await prisma.user.update({
@@ -95,6 +95,7 @@ export const updateUser = async (
         name,
         restaurantName,
         email,
+        passwordHash: await hashing(password),
       },
     });
 

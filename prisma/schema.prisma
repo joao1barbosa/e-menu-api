@@ -8,25 +8,34 @@ datasource db {
 }
 
 model User {
-  id             Int       @id @default(autoincrement())
-  name           String
-  restaurantName String    @unique
-  email          String    @unique
-  passwordHash   String
-  picture        String?
-  Products       Product[]
-  updateAt       DateTime  @updatedAt
-  createdAt      DateTime  @default(now())
+  id            Int       @id @default(autoincrement())
+  name          String
+  email         String    @unique
+  passwordHash  String
+  restaurant    Restaurant?
+  updateAt      DateTime  @updatedAt
+  createdAt     DateTime  @default(now())
+}
+
+model Restaurant {
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  picture   String?
+  Products  Product[]
+  User      User @relation(fields: [userId], references: [id])
+  userId    Int @unique
+  updateAt  DateTime  @updatedAt
+  createdAt DateTime  @default(now())
 }
 
 model Product {
-  id             Int       @id @default(autoincrement())
-  name           String
-  description    String
-  price          Float
-  picture        String?
-  restaurant     User      @relation(fields: [restaurantID], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  restaurantID   Int
-  updatedAt      DateTime  @updatedAt
-  createdAt      DateTime  @default(now())
+  id           Int         @id @default(autoincrement())
+  name         String
+  description  String
+  price        Int
+  picture      String?
+  Restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  restaurantId Int
+  updatedAt    DateTime    @updatedAt
+  createdAt    DateTime    @default(now())
 }

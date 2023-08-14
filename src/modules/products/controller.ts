@@ -10,7 +10,7 @@ export const createProduct = async (
   next: NextFunction
  ) => {
   const {
-    name, description, price, restaurantID
+    name, description, price, restaurantId
   } = req.body;
 
   try {
@@ -19,14 +19,14 @@ export const createProduct = async (
         name,
         description,
         price,
-        restaurantID,
+        restaurantId,
       },
     });
 
     return res.status(201).json({
       id: result.id,
       name: result.name,
-      restaurantID: result.restaurantID
+      restaurantId: result.restaurantId
       });
   }catch(e){
     return res.status(400).json({
@@ -45,7 +45,7 @@ export const listProductByRestaurant = async (
   try {
     const result = await prisma.product.findMany({
       where: {
-        restaurantID: Number(id),
+        restaurantId: Number(id),
       },
     });
 

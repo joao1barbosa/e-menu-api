@@ -16,14 +16,13 @@ export const createUser = async (
   next: NextFunction
  ) => {
   const {
-    name, restaurantName, email, password,
+    name, email, password,
   } = req.body;
 
   try {
     const result = await prisma.user.create({
       data: {
         name,
-        restaurantName,
         email,
         passwordHash: await hashing(password),
       },
@@ -33,7 +32,6 @@ export const createUser = async (
       {
         id: result.id,
         name: result.name,
-        restaurantName: result.restaurantName,
         email: result.email
       });
   } catch (e) {
@@ -55,6 +53,17 @@ export const getUserbyId = async (
       where: {
         id: Number(id),
       },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        restaurant: {
+          select:{
+            id: true,
+            name: true,
+          }
+        },
+      },
     });
 
     const statusCode = result ? 200 : 404;
@@ -64,8 +73,8 @@ export const getUserbyId = async (
       {
         id: result.id,
         name: result.name,
-        restaurantName: result.restaurantName,
-        email: result.email
+        email: result.email,
+        restaurant: result.restaurant
       }
     :
     {
@@ -84,7 +93,7 @@ export const updateUser = async (
   next: NextFunction
  ) => {
   const { id } = req.params;
-  const { name, restaurantName, email, password} = req.body;
+  const { name, email, password} = req.body;
 
   try {
     const result = await prisma.user.update({
@@ -93,7 +102,6 @@ export const updateUser = async (
       },
       data: {
         name,
-        restaurantName,
         email,
         passwordHash: await hashing(password),
       },
@@ -102,7 +110,6 @@ export const updateUser = async (
     return res.status(200).json({
       id: result.id,
       name: result.name,
-      restaurantName: result.restaurantName,
       email: result.email
     });
 
@@ -130,7 +137,6 @@ export const deleteUser = async (
     return res.status(200).json({
       id: result.id,
       name: result.name,
-      restaurantName: result.restaurantName,
       email: result.email,
     });
   } catch (e) {

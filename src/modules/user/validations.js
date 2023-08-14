@@ -4,8 +4,6 @@ export const createUserValidation = z.object({
   body: z.object({
     name: z.string()
       .min(3, { message: "Nome muito curto" }),
-    restaurantName: z.string()
-      .min(3, { message: "Nome do restaurante muito curto" }),
     email: z.string()
       .email({ message: "Email inválido" }),
     password: z.string()
@@ -27,9 +25,6 @@ export const updateUserValidation = z.object({
   body: z.object({
     name: z.string()
       .min(3, { message: "Nome muito curto" })
-      .optional(),
-    restaurantName: z.string()
-      .min(3, { message: "Nome do restaurante muito curto" })
       .optional(),
     email: z.string()
       .email({ message: "Email inválido" })

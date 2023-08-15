@@ -105,6 +105,11 @@ export const updateUser = async (
         email,
         passwordHash: await hashing(password),
       },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+      },
     });
 
     return res.status(200).json({
@@ -131,6 +136,11 @@ export const deleteUser = async (
     const result = await prisma.user.delete({
       where: {
         id: Number(id),
+      },
+      select: {
+        id: true,
+        name: true,
+        email: true,
       },
     });
 

@@ -24,4 +24,4 @@ router
   .patch(validate(updateRestaurantValidation), updateRestaurant)
   .delete(validate(idValidation), deleteRestaurant);
 
-export { router as UserRouter };
+export { router as RestaurantRouter };

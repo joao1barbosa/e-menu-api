@@ -6,7 +6,7 @@ import { UserRouter } from './user/router';
 
 const routes = Router();
 
-// routes.use('/product', ProductRouter);
+routes.use('/product', ProductRouter);
 routes.use('/restaurant', RestaurantRouter);
 routes.use('/token', TokenRouter);
 routes.use('/user', UserRouter);

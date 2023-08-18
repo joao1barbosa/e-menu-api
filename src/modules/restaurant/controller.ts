@@ -25,7 +25,9 @@ export const createRestaurant = async (
 
     return res.status(201).json(
       {
-        id: result.id
+        id: result.id,
+        name: result.name,
+        userId: result.userId
       });
   } catch (e) {
     return res.status(400).json({

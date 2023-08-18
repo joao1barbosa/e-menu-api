@@ -4,7 +4,7 @@ export const createRestaurantValidation = z.object({
   body: z.object({
     name: z.string()
       .min(3, { message: "Nome muito curto" }),
-    userId: z.string(),
+    userId: z.number(),
   }),
 });
 

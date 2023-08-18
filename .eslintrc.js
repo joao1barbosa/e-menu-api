@@ -20,5 +20,6 @@ module.exports = {
     'import/no-unresolved': 'off',
     'nonblock-statement-body-position': 'off',
     curly: 'off',
+    'slintspaced-comment': 'off',
   },
 };

@@ -1,3 +1,5 @@
+// function to handle with incomum errors
+
 export const errorHandler = (error) => {
   console.log(error);
 

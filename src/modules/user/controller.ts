@@ -10,6 +10,21 @@ async function hashing(password) {
   return hashed;
 }
 
+function defaultReturn(result){
+  return result
+    ?
+      {
+        id: result.id,
+        name: result.name,
+        email: result.email,
+        restaurant: result.restaurant
+      }
+    :
+    {
+      errors: 'Usuário não encontrado',
+    };
+}
+
 export const createUser = async (
   req: Request,
   res: Response,
@@ -68,18 +83,8 @@ export const getUserbyId = async (
 
     const statusCode = result ? 200 : 404;
 
-    return res.status(statusCode).json(result
-    ?
-      {
-        id: result.id,
-        name: result.name,
-        email: result.email,
-        restaurant: result.restaurant
-      }
-    :
-    {
-      errors: 'Usuário não encontrado',
-    });
+    return res.status(statusCode).json(defaultReturn(result));
+
   } catch (e) {
     return res.status(400).json({
       errors: errorHandler(e),
@@ -109,14 +114,21 @@ export const updateUser = async (
         id: true,
         name: true,
         email: true,
+        restaurant: {
+          select:{
+            id: true,
+            name: true,
+          }
+        },
       },
     });
 
-    return res.status(200).json({
-      id: result.id,
-      name: result.name,
-      email: result.email
-    });
+    const statusCode = result ? 200 : 404;
+
+    console.log(statusCode);
+    console.log(result);
+
+    return res.status(statusCode).json(defaultReturn(result));
 
   } catch (e) {
     return res.status(400).json({
@@ -141,14 +153,22 @@ export const deleteUser = async (
         id: true,
         name: true,
         email: true,
+        restaurant: {
+          select:{
+            id: true,
+            name: true,
+          }
+        },
       },
     });
 
-    return res.status(200).json({
-      id: result.id,
-      name: result.name,
-      email: result.email,
-    });
+    const statusCode = result ? 200 : 404;
+
+    console.log(statusCode);
+    console.log(result);
+
+    return res.status(statusCode).json(defaultReturn(result));
+
   } catch (e) {
     return res.status(400).json({
       errors: errorHandler(e),

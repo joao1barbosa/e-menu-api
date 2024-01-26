@@ -1,0 +1,28 @@
+POST http://localhost:3002/user/
+content-type: application/json
+
+{
+  "name": "João",
+  "email": "joao@gmail.com",
+  "password": "senha1"
+}
+
+###
+
+GET http://localhost:3002/user/1
+
+###
+
+PATCH http://localhost:3002/user/1
+content-type: application/json
+
+{
+  "name": "João",
+  "email": "joao@gmail.com",
+  "password": "senha1"
+}
+
+###
+
+DELETE http://localhost:3002/user/1
+

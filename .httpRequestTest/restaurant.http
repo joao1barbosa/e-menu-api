@@ -1,0 +1,26 @@
+POST http://localhost:3002/restaurant/
+content-type: application/json
+Authorization: token {token}
+
+{
+  "name": "João",
+  "userId": 1
+}
+
+###
+
+GET http://localhost:3002/restaurant/
+
+###
+
+PATCH http://localhost:3002/restaurant/1
+content-type: application/json
+
+{
+  "name": "jotinha"
+}
+
+###
+
+DELETE http://localhost:3002/restaurant/1
+

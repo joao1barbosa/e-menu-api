@@ -1,10 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../../services/db';
 import { errorHandler } from '../errors';
 import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-
-const prisma = new PrismaClient();
 
 async function passwordIsValid(reqPassword, userPassword) {
   return await bcryptjs.compare(reqPassword, userPassword);

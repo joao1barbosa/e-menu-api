@@ -1,9 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { RequestWithUserData } from '../interfaces';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../../services/db';
 import { errorHandler } from '../errors';
-
-const prisma = new PrismaClient();
 
 export const createRestaurant = async (
   req: RequestWithUserData,

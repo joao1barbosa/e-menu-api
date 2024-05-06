@@ -1,8 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../../services/db';
 import { errorHandler } from '../errors';
-
-const prisma = new PrismaClient();
 
 export const createProduct = async (
   req: Request,

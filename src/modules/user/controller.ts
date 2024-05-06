@@ -1,9 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../../services/db';
 import { errorHandler } from '../errors';
 import bcryptjs from 'bcryptjs';
-
-const prisma = new PrismaClient();
+import { RequestWithUserData } from '../interfaces';
 
 async function hashing(password) {
   const hashed = await bcryptjs.hash(password, 8);
@@ -57,16 +56,14 @@ export const createUser = async (
 };
 
 export const getUserbyId = async (
-  req: Request,
+  req: RequestWithUserData,
   res: Response,
   next: NextFunction
  ) => {
-  const { id } = req.params;
-
   try {
     const result = await prisma.user.findUnique({
       where: {
-        id: Number(id),
+        id: Number(req.userId),
       },
       select: {
         id: true,
@@ -93,17 +90,16 @@ export const getUserbyId = async (
 };
 
 export const updateUser = async (
-  req: Request,
+  req: RequestWithUserData,
   res: Response,
   next: NextFunction
  ) => {
-  const { id } = req.params;
   const { name, email, password} = req.body;
 
   try {
     const result = await prisma.user.update({
       where: {
-        id: Number(id),
+        id: Number(req.userId),
       },
       data: {
         name,

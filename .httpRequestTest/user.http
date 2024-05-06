@@ -2,14 +2,15 @@ POST http://localhost:3002/user/
 content-type: application/json
 
 {
-  "name": "João",
-  "email": "joao@gmail.com",
+  "name": "felipe",
+  "email": "felipe@gmail.com",
   "password": "senha1"
 }
 
 ###
 
-GET http://localhost:3002/user/2
+GET http://localhost:3002/user/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJqb2FvQGdtYWlsLmNvbSIsImlhdCI6MTcxNTAwNjYzNSwiZXhwIjoxNzE1NjExNDM1fQ.clAuACFImEnJcZ6wsGuus17mXB4qnZd3ficfZjruRtc
 
 ###
 

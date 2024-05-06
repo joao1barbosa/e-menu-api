@@ -1,9 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { RequestWithUserData } from '../modules/interfaces';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../services/db';
 import jwt from 'jsonwebtoken';
-
-const prisma = new PrismaClient();
 
 export const loginRequired = async (
   req: RequestWithUserData,
@@ -14,7 +12,7 @@ export const loginRequired = async (
 
   if (!authorization) {
     return res.status(401).json({
-      errors: 'Necessário fazer login.',
+      errors: 'Missing authorization header',
     });
   }
 

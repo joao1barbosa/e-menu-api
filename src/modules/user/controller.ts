@@ -63,7 +63,7 @@ export const getUserbyId = async (
   try {
     const result = await prisma.user.findUnique({
       where: {
-        id: Number(req.userId),
+        id: Number(req.user?.id),
       },
       select: {
         id: true,
@@ -94,12 +94,12 @@ export const updateUser = async (
   res: Response,
   next: NextFunction
  ) => {
-  const { name, email, password} = req.body;
+  const { name, email, password } = req.body;
 
   try {
     const result = await prisma.user.update({
       where: {
-        id: Number(req.userId),
+        id: Number(req.user?.id),
       },
       data: {
         name,
@@ -131,16 +131,15 @@ export const updateUser = async (
 };
 
 export const deleteUser = async (
-  req: Request,
+  req: RequestWithUserData,
   res: Response,
   next: NextFunction
  ) => {
-  const { id } = req.params;
 
   try {
     const result = await prisma.user.delete({
       where: {
-        id: Number(id),
+        id: Number(req.user?.id),
       },
       select: {
         id: true,

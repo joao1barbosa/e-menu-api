@@ -20,7 +20,7 @@ export const loginRequired = async (
 
   try {
     const dados = jwt.verify(token, process.env.TOKEN_SECRET);
-    const { id, email } = dados;
+    const { id, email, restaurant } = dados;
 
     const result = await prisma.user.findUnique({
       where: {
@@ -38,8 +38,11 @@ export const loginRequired = async (
       });
     }
 
-    req.userId = id;
-    req.userEmail = email;
+    req.user = {
+      id: id,
+      email: email,
+      restaurant: restaurant
+    };
 
     return next();
   } catch (e) {

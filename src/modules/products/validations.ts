@@ -20,9 +20,6 @@ export const idValidation = z.object({
 });
 
 export const updateProductValidation = z.object({
-  params: z.object({
-    id: z.string(),
-  }),
   body: z.object({
     name: z.string()
       .min(3, { message: "Nome do produto muito curto" })

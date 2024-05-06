@@ -17,12 +17,12 @@ const router = Router();
 
 router
   .route('/')
-  .post(validate(createRestaurantValidation), loginRequired, createRestaurant);
+  .post(validate(createRestaurantValidation), loginRequired, createRestaurant)
+  .patch(validate(updateRestaurantValidation),loginRequired, updateRestaurant)
+  .delete(loginRequired, deleteRestaurant);
 
 router
   .route('/:id')
-  .get(validate(idValidation), getRestaurantbyId)
-  .patch(validate(updateRestaurantValidation), updateRestaurant)
-  .delete(validate(idValidation), deleteRestaurant);
+  .get(validate(idValidation), getRestaurantbyId);
 
 export { router as RestaurantRouter };

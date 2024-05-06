@@ -7,7 +7,6 @@ import {
 } from './controller';
 import {
   createUserValidation,
-  idValidation,
   updateUserValidation,
 } from './validations';
 import { validate } from '../../middlewares/validate';
@@ -19,10 +18,6 @@ router
   .route('/')
   .post(validate(createUserValidation), createUser)
   .patch(validate(updateUserValidation),loginRequired, updateUser)
-  .delete(validate(idValidation),loginRequired, deleteUser);
-
-router
-  .route('/:id')
-  .get(validate(idValidation), loginRequired, getUserbyId);
+  .delete(loginRequired, deleteUser);
 
 export { router as UserRouter };

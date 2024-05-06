@@ -1,15 +1,22 @@
 import { Request, Response, NextFunction } from 'express';
+import { RequestWithUserData } from '../interfaces';
 import { prisma } from '../../services/db';
 import { errorHandler } from '../errors';
 
 export const createProduct = async (
-  req: Request,
+  req: RequestWithUserData,
   res: Response,
   next: NextFunction
  ) => {
   const {
-    name, description, price, restaurantId
+    name, description, price
   } = req.body;
+
+  if(!req.user?.restaurant){
+    return res.status(404).json({
+      errors: 'É necessário criar um restaurante antes de adicionar produtos',
+    });
+  }
 
   try {
     const result = await prisma.product.create({
@@ -17,7 +24,7 @@ export const createProduct = async (
         name,
         description,
         price,
-        restaurantId,
+        restaurantId: Number(req.user?.restaurant),
       },
     });
 
@@ -72,20 +79,20 @@ export const listProductByRestaurant = async (
 };
 
 export const updateProduct = async (
-  req: Request,
+  req: RequestWithUserData,
   res: Response,
   next: NextFunction
 ) => {
 
-  const { id } = req.params;
   const {
-    name, description, price,
+    id, name, description, price
   } = req.body;
 
   try {
     const result = await prisma.product.update({
       where: {
-        id: Number(id),
+        id,
+        restaurantId: Number(req.user?.restaurant),
       },
       data: {
         name,
@@ -109,16 +116,17 @@ export const updateProduct = async (
 };
 
 export const deleteProduct = async (
-  req: Request,
+  req: RequestWithUserData,
   res: Response,
   next: NextFunction
  ) => {
-  const { id } = req.params;
+  const { id } = req.body;
 
   try {
     const result = await prisma.product.delete({
       where: {
-        id: Number(id),
+        id,
+        restaurantId: Number(req.user?.restaurant)
       },
     });
 

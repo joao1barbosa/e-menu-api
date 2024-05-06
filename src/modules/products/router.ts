@@ -11,17 +11,19 @@ import {
   updateProductValidation,
 } from './validations';
 import { validate } from '../../middlewares/validate';
+import { loginRequired } from '../../middlewares/loginRequired';
 
 const router = Router();
 
 router
   .route('/')
-  .post(validate(createProductValidation), createProduct);
+  .post(validate(createProductValidation),loginRequired, createProduct)
+  .patch(validate(updateProductValidation), loginRequired, updateProduct)
+  .delete(validate(idValidation), loginRequired, deleteProduct);
 
 router
   .route('/:id')
-  .get(validate(idValidation), listProductByRestaurant)
-  .patch(validate(updateProductValidation), updateProduct)
-  .delete(validate(idValidation), deleteProduct);
+  .get(validate(idValidation), listProductByRestaurant);
+
 
 export { router as ProductRouter };

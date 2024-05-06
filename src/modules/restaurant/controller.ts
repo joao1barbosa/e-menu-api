@@ -8,13 +8,8 @@ export const createRestaurant = async (
   res: Response,
   next: NextFunction
  ) => {
-  const user  = req.userId;
 
-  if(!user){
-    return { errors: "Token sem usuário"}
-  }
-
-  const userId = Number(user);
+  const userId = Number(req.user?.id);
 
   const { name } = req.body;
 
@@ -40,7 +35,7 @@ export const createRestaurant = async (
 };
 
 export const getRestaurantbyId = async (
-  req: Request,
+  req: RequestWithUserData,
   res: Response,
   next: NextFunction
  ) => {
@@ -79,17 +74,16 @@ export const getRestaurantbyId = async (
 };
 
 export const updateRestaurant = async (
-  req: Request,
+  req: RequestWithUserData,
   res: Response,
   next: NextFunction
  ) => {
-  const { id } = req.params;
   const { name } = req.body;
 
   try {
     const result = await prisma.restaurant.update({
       where: {
-        id: Number(id),
+        userId: Number(req.user?.id),
       },
       data: {
         name,
@@ -115,16 +109,15 @@ export const updateRestaurant = async (
 };
 
 export const deleteRestaurant = async (
-  req: Request,
+  req: RequestWithUserData,
   res: Response,
   next: NextFunction
  ) => {
-  const { id } = req.params;
 
   try {
     const result = await prisma.restaurant.delete({
       where: {
-        id: Number(id),
+        userId: Number(req.user?.id),
       },
       select:{
         id: true,

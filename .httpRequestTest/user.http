@@ -9,21 +9,22 @@ content-type: application/json
 
 ###
 
-GET http://localhost:3002/user/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJqb2FvQGdtYWlsLmNvbSIsImlhdCI6MTcxNTAwNjYzNSwiZXhwIjoxNzE1NjExNDM1fQ.clAuACFImEnJcZ6wsGuus17mXB4qnZd3ficfZjruRtc
+GET http://localhost:3002/user/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJmZWxpcGVAZ21haWwuY29tIiwicmVzdGF1cmFudCI6bnVsbCwiaWF0IjoxNzE1MDMxNjk5LCJleHAiOjE3MTU2MzY0OTl9.OONsPQzYQYUzQIDbYB_oDFV0Q-1D0h-W6EyYK6x2Co4
 
 ###
 
-PATCH http://localhost:3002/user/1
+PATCH http://localhost:3002/user/
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJmZWxpcEBnbWFpbC5jb20iLCJyZXN0YXVyYW50IjoxNywiaWF0IjoxNzE1MDMyMTM5LCJleHAiOjE3MTU2MzY5Mzl9.kep5gjyPB_OxHX9miVOjI1X6UZ9UbIzGqaA_pIpLbjo
 
 {
-  "name": "João",
-  "email": "joao@gmail.com",
+  "name": "Felip",
+  "email": "felip@gmail.com",
   "password": "senha1"
 }
 
 ###
 
-DELETE http://localhost:3002/user/1
+DELETE http://localhost:3002/user/
 

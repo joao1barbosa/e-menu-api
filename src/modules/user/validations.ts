@@ -12,16 +12,7 @@ export const createUserValidation = z.object({
   }),
 });
 
-export const idValidation = z.object({
-  params: z.object({
-    id: z.string(),
-  }),
-});
-
 export const updateUserValidation = z.object({
-  params: z.object({
-    id: z.string(),
-  }),
   body: z.object({
     name: z.string()
       .min(3, { message: "Nome muito curto" })

@@ -25,6 +25,11 @@ export const createToken = async (
     const result = await prisma.user.findUnique({
       where: {
         email: email,
+      },
+      select:{
+        id: true,
+        passwordHash: true,
+        restaurant: true
       }
     });
 
@@ -41,7 +46,9 @@ export const createToken = async (
     }
 
     const { id } = result;
-    const token = jwt.sign({ id, email }, process.env.TOKEN_SECRET, {
+    const restaurant = result.restaurant?.id;
+
+    const token = jwt.sign({ id, email, restaurant }, process.env.TOKEN_SECRET, {
       expiresIn: process.env.TOKEN_EXPIRATION,
     });
 

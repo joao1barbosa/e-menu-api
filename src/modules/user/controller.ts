@@ -125,9 +125,6 @@ export const updateUser = async (
 
     const statusCode = result ? 200 : 404;
 
-    console.log(statusCode);
-    console.log(result);
-
     return res.status(statusCode).json(defaultReturn(result));
 
   } catch (e) {
@@ -163,9 +160,6 @@ export const deleteUser = async (
     });
 
     const statusCode = result ? 200 : 404;
-
-    console.log(statusCode);
-    console.log(result);
 
     return res.status(statusCode).json(defaultReturn(result));
 

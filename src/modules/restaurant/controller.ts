@@ -1,13 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
+import { RequestWithUserData } from '../interfaces';
 import { PrismaClient } from '@prisma/client';
 import { errorHandler } from '../errors';
 
 const prisma = new PrismaClient();
-
-interface RequestWithUserData extends Request {
-  userId?: string;
-  userEmail?: string;
-}
 
 export const createRestaurant = async (
   req: RequestWithUserData,
@@ -23,8 +19,6 @@ export const createRestaurant = async (
   const userId = Number(user);
 
   const { name } = req.body;
-//toFix: o id do usuário não deve ser passado no req.body, deve vir da validação do mesmo
-
 
   try {
     const result = await prisma.restaurant.create({

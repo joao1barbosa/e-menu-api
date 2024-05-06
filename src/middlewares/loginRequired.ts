@@ -28,14 +28,17 @@ export const loginRequired = async (
     const dados = jwt.verify(token, process.env.TOKEN_SECRET);
     const { id, email } = dados;
 
-    const result = await prisma.user.findFirst({
+    const result = await prisma.user.findUnique({
       where: {
-        id,
-        email
+        id: id,
+        email: email
+      },
+      select:{
+        id: true,
       }
     });
 
-    if (result !== null) {
+    if (!result) {
       return res.status(401).json({
         errors: 'Usário inválido',
       });

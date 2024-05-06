@@ -24,13 +24,13 @@ export const createToken = async (
   }
 
   try {
-    const result = await prisma.user.findFirst({
+    const result = await prisma.user.findUnique({
       where: {
         email: email,
       }
     });
 
-    if (result === null){
+    if (!result){
       return res.status(404).json({
         errors: 'Usuário não existe'
       });
@@ -42,7 +42,7 @@ export const createToken = async (
       })
     }
 
-    const id = result.id;
+    const { id } = result;
     const token = jwt.sign({ id, email }, process.env.TOKEN_SECRET, {
       expiresIn: process.env.TOKEN_EXPIRATION,
     });

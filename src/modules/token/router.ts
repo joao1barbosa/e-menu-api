@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { createToken } from './controller';
 
-const router = new Router();
+const router = Router();
 
 router.post('/', createToken);
 

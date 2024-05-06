@@ -4,16 +4,27 @@ import { errorHandler } from '../errors';
 
 const prisma = new PrismaClient();
 
+interface RequestWithUserData extends Request {
+  userId?: string;
+  userEmail?: string;
+}
+
 export const createRestaurant = async (
-  req: Request,
+  req: RequestWithUserData,
   res: Response,
   next: NextFunction
  ) => {
-  const {
-    name, userId
-  } = req.body;
+  const user  = req.userId;
 
+  if(!user){
+    return { errors: "Token sem usuário"}
+  }
+
+  const userId = Number(user);
+
+  const { name } = req.body;
 //toFix: o id do usuário não deve ser passado no req.body, deve vir da validação do mesmo
+
 
   try {
     const result = await prisma.restaurant.create({
@@ -44,7 +55,7 @@ export const getRestaurantbyId = async (
   const { id } = req.params;
 
   try {
-    const result = await prisma.restaurant.findFirst({
+    const result = await prisma.restaurant.findUnique({
       where: {
         id: Number(id),
       },

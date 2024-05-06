@@ -1,7 +1,6 @@
 // function to handle with incomum errors
 
 export const errorHandler = (error) => {
-  // console.log(error);
 
   if (error.code === 'P2002') {
     if (error.meta.target[0] === 'email')
@@ -28,5 +27,6 @@ export const errorHandler = (error) => {
   if ((error.code === 'too_small') || (error.code === 'too_big'))
     return error.message;
 
+  console.log(error);
   return 'Erro não comum';
 };

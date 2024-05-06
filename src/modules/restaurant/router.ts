@@ -11,12 +11,13 @@ import {
   updateRestaurantValidation,
 } from './validations';
 import { validate } from '../../middlewares/validate';
+import { loginRequired } from '../../middlewares/loginRequired';
 
 const router = Router();
 
 router
   .route('/')
-  .post(validate(createRestaurantValidation), createRestaurant);
+  .post(validate(createRestaurantValidation), loginRequired, createRestaurant);
 
 router
   .route('/:id')

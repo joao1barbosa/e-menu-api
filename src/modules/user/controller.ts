@@ -20,9 +20,9 @@ function defaultReturn(result){
         restaurant: result.restaurant
       }
     :
-    {
-      errors: 'Usuário não encontrado',
-    };
+      {
+        errors: 'Usuário não encontrado',
+      };
 }
 
 export const createUser = async (
@@ -64,7 +64,7 @@ export const getUserbyId = async (
   const { id } = req.params;
 
   try {
-    const result = await prisma.user.findFirst({
+    const result = await prisma.user.findUnique({
       where: {
         id: Number(id),
       },

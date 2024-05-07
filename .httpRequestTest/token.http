@@ -1,7 +1,0 @@
-POST http://localhost:3002/token/
-content-type: application/json
-
-{
-	"email": "felip@gmail.com",
-  "password": "senha1"
-}

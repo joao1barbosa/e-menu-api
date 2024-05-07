@@ -1,13 +1,15 @@
 {
   "name": "e-menu-api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "personal project to study API REST",
   "main": "index.js",
   "engines": {
     "node": ">=18"
   },
   "scripts": {
-    "dev": "nodemon src/*"
+    "dev": "nodemon src/*",
+    "build": "sucrase ./src -d ./dist --transforms typescript,imports",
+    "start": "node dist/index.js"
   },
   "author": "",
   "license": "ISC",

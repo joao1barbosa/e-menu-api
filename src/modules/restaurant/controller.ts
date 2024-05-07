@@ -3,6 +3,8 @@ import { RequestWithUserData } from '../interfaces';
 import { prisma } from '../../services/db';
 import { errorHandler } from '../errors';
 
+const url = `${process.env.URL}:${process.env.PORT}/`;
+
 export const createRestaurant = async (
   req: RequestWithUserData,
   res: Response,
@@ -26,7 +28,7 @@ export const createRestaurant = async (
         id: result.id,
         name: result.name,
         userId: result.userId,
-        picture: result.picture
+        picture: url + result.picture
       });
   } catch (e) {
     return res.status(400).json({
@@ -88,18 +90,21 @@ export const updateRestaurant = async (
       },
       data: {
         name,
+        picture: req.file?.path.replace('\\', '/')
       },
       select:{
         id: true,
         name: true,
         userId: true,
+        picture: true,
       }
     });
 
     return res.status(200).json({
       id: result.id,
       name: result.name,
-      userId: result.userId
+      userId: result.userId,
+      picture: url + result.picture
     });
 
   } catch (e) {
@@ -123,7 +128,7 @@ export const deleteRestaurant = async (
       select:{
         id: true,
         name: true,
-        userId:true,
+        userId: true,
       }
     });
 

@@ -10,8 +10,6 @@ export const loginRequired = async (
 ) => {
   const { authorization } = req.headers;
 
-  console.log(req.body);
-
   if (!authorization) {
     return res.status(401).json({
       errors: 'Missing authorization header',

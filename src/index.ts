@@ -25,5 +25,5 @@ server.use(routes);
 server.listen(process.env.PORT, () => {
   console.log();
   console.log(`Escutando na porta ${process.env.PORT}`);
-  console.log(`http://localhost:${process.env.PORT}`);
+  console.log(`${process.env.URL}:${process.env.PORT}`);
 });

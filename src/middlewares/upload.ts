@@ -16,8 +16,7 @@ const storage = multer.diskStorage({
     const name = String(req.body.name).toLowerCase();
     cb(
       null,
-      file.filename +
-        name.replace(" ", "") +
+      name.replace(" ", "") +
         '-' +
         uniqueSuffix +
         path.extname(file.originalname)
@@ -26,11 +25,5 @@ const storage = multer.diskStorage({
 });
 
 export const upload = multer({
-  // fileFilter: (req, file, cb) => {
-  //   if(file.mimetype !== 'image/png' || file.mimetype !== 'image/jpg')
-  //     return cb(new multer.MulterError('Arquivo precisa ser PNG ou JPG.'));
-
-  //   return cb(null, true);
-  // },
   storage: storage,
 });

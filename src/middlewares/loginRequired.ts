@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { Response, NextFunction } from 'express';
 import { RequestWithUserData } from '../modules/interfaces';
 import { prisma } from '../services/db';
 import jwt from 'jsonwebtoken';
@@ -10,6 +10,8 @@ export const loginRequired = async (
 ) => {
   const { authorization } = req.headers;
 
+  console.log(req.body);
+
   if (!authorization) {
     return res.status(401).json({
       errors: 'Missing authorization header',
@@ -19,8 +21,8 @@ export const loginRequired = async (
   const [, token] = authorization.split(' ');
 
   try {
-    const dados = jwt.verify(token, process.env.TOKEN_SECRET);
-    const { id, email, restaurant } = dados;
+    const data: any = jwt.verify(token, process.env.TOKEN_SECRET || '');
+    const { id, email, restaurant } = data;
 
     const result = await prisma.user.findUnique({
       where: {

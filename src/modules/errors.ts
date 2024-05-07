@@ -1,6 +1,6 @@
 // function to handle with incomum errors
 
-export const errorHandler = (error) => {
+export const errorHandler = (error: any) => {
 
   if (error.code === 'P2002') {
     if (error.meta.target[0] === 'email')

@@ -12,13 +12,14 @@ import {
 } from './validations';
 import { validate } from '../../middlewares/validate';
 import { loginRequired } from '../../middlewares/loginRequired';
+import { upload } from '../../middlewares/upload';
 
 const router = Router();
 
 router
   .route('/')
-  .post(validate(createRestaurantValidation), loginRequired, createRestaurant)
-  .patch(validate(updateRestaurantValidation),loginRequired, updateRestaurant)
+  .post(loginRequired,  upload.single('picture'), validate(createRestaurantValidation), createRestaurant)
+  .patch(loginRequired, validate(updateRestaurantValidation), updateRestaurant)
   .delete(loginRequired, deleteRestaurant);
 
 router

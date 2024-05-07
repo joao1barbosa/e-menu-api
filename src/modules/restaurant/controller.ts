@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { Response, NextFunction } from 'express';
 import { RequestWithUserData } from '../interfaces';
 import { prisma } from '../../services/db';
 import { errorHandler } from '../errors';
@@ -8,7 +8,6 @@ export const createRestaurant = async (
   res: Response,
   next: NextFunction
  ) => {
-
   const userId = Number(req.user?.id);
 
   const { name } = req.body;
@@ -18,6 +17,7 @@ export const createRestaurant = async (
       data: {
         name,
         userId,
+        picture: req.file?.path.replace('\\', '/')
       },
     });
 
@@ -25,7 +25,8 @@ export const createRestaurant = async (
       {
         id: result.id,
         name: result.name,
-        userId: result.userId
+        userId: result.userId,
+        picture: result.picture
       });
   } catch (e) {
     return res.status(400).json({

@@ -1,11 +1,15 @@
 POST http://localhost:3002/restaurant/
-content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJmZWxpcGVAZ21haWwuY29tIiwicmVzdGF1cmFudCI6bnVsbCwiaWF0IjoxNzE1MDMxNjk5LCJleHAiOjE3MTU2MzY0OTl9.OONsPQzYQYUzQIDbYB_oDFV0Q-1D0h-W6EyYK6x2Co4
+content-type: multipart/form-data
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJmZWxpcEBnbWFpbC5jb20iLCJyZXN0YXVyYW50IjoxNywiaWF0IjoxNzE1MDk2NTUxLCJleHAiOjE3MTU3MDEzNTF9.q6fXXkNB8gBfCk8Gyob7L58PPkJomChYlHhXrXOOCaM
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="name"
 
-{
-  "name": "Sokomo"
-}
+"Somoko"
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="picture"; filename="1.png"
+Content-Type: image/png
 
+< ./1.png
 ###
 
 GET http://localhost:3002/restaurant/17

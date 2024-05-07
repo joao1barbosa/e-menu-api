@@ -4,12 +4,12 @@ import { errorHandler } from '../errors';
 import bcryptjs from 'bcryptjs';
 import { RequestWithUserData } from '../interfaces';
 
-async function hashing(password) {
+async function hashing(password: string) {
   const hashed = await bcryptjs.hash(password, 8);
   return hashed;
 }
 
-function defaultReturn(result){
+function defaultReturn(result: any){
   return result
     ?
       {

@@ -4,7 +4,7 @@ import { errorHandler } from '../errors';
 import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-async function passwordIsValid(reqPassword, userPassword) {
+async function passwordIsValid(reqPassword: string, userPassword: string) {
   return await bcryptjs.compare(reqPassword, userPassword);
 }
 
@@ -48,7 +48,7 @@ export const createToken = async (
     const { id } = result;
     const restaurant = result.restaurant?.id;
 
-    const token = jwt.sign({ id, email, restaurant }, process.env.TOKEN_SECRET, {
+    const token = jwt.sign({ id, email, restaurant }, process.env.TOKEN_SECRET || '', {
       expiresIn: process.env.TOKEN_EXPIRATION,
     });
 

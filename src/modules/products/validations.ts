@@ -14,7 +14,7 @@ export const createProductValidation = z.object({
 });
 
 export const idValidation = z.object({
-  params: z.object({
+  body: z.object({
     id: z.string(),
   }),
 });

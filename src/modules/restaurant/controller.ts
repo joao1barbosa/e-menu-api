@@ -19,7 +19,7 @@ export const createRestaurant = async (
       data: {
         name,
         userId,
-        picture: req.file?.path.replace('\\', '/')
+        picture: req.file?.path.replace('\\', '/'),
       },
     });
 
@@ -90,7 +90,7 @@ export const updateRestaurant = async (
       },
       data: {
         name,
-        picture: req.file?.path.replace('\\', '/')
+        picture: req.file?.path.replace('\\', '/'),
       },
       select:{
         id: true,
@@ -104,7 +104,7 @@ export const updateRestaurant = async (
       id: result.id,
       name: result.name,
       userId: result.userId,
-      picture: url + result.picture
+      picture: url + result.picture,
     });
 
   } catch (e) {

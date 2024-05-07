@@ -18,8 +18,8 @@ const router = Router();
 
 router
   .route('/')
-  .post(loginRequired,  upload.single('picture'), validate(createRestaurantValidation), createRestaurant)
-  .patch(loginRequired, validate(updateRestaurantValidation), updateRestaurant)
+  .post(loginRequired, upload.single('picture'), validate(createRestaurantValidation), createRestaurant)
+  .patch(loginRequired, upload.single('picture'), validate(updateRestaurantValidation), updateRestaurant)
   .delete(loginRequired, deleteRestaurant);
 
 router

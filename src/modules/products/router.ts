@@ -12,14 +12,15 @@ import {
 } from './validations';
 import { validate } from '../../middlewares/validate';
 import { loginRequired } from '../../middlewares/loginRequired';
+import { upload } from '../../middlewares/upload';
 
 const router = Router();
 
 router
   .route('/')
-  .post(validate(createProductValidation),loginRequired, createProduct)
-  .patch(validate(updateProductValidation), loginRequired, updateProduct)
-  .delete(validate(idValidation), loginRequired, deleteProduct);
+  .post(loginRequired, upload.single('picture'), validate(createProductValidation), createProduct)
+  .patch(loginRequired, upload.single('picture'), validate(updateProductValidation), updateProduct)
+  .delete(loginRequired, deleteProduct);
 
 router
   .route('/:id')

@@ -3,6 +3,8 @@ import { RequestWithUserData } from '../interfaces';
 import { prisma } from '../../services/db';
 import { errorHandler } from '../errors';
 
+const url = `${process.env.URL}:${process.env.PORT}/`;
+
 export const createProduct = async (
   req: RequestWithUserData,
   res: Response,
@@ -24,13 +26,15 @@ export const createProduct = async (
         name,
         description,
         price,
-        restaurantId: Number(req.user?.restaurant),
+        picture: req.file?.path.replace('\\', '/'),
+        restaurantId: Number(req.user?.restaurant)
       },
     });
 
     return res.status(201).json({
       id: result.id,
       name: result.name,
+      picture: url + result.picture,
       restaurantId: result.restaurantId
       });
   }catch(e){
@@ -52,6 +56,13 @@ export const listProductByRestaurant = async (
       where: {
         restaurantId: Number(id),
       },
+      select: {
+        id: true,
+        name: true,
+        description: true,
+        price: true,
+        picture: true
+      },
     });
 
     if (result === null){
@@ -62,10 +73,11 @@ export const listProductByRestaurant = async (
 
     const productsList = result.map((obj) => {
       return {
+        id: obj.id,
         name: obj.name,
         description: obj.description,
         price: obj.price,
-        picture: obj.picture,
+        picture: url + obj.picture,
       };
     });
 
@@ -98,6 +110,7 @@ export const updateProduct = async (
         name,
         description,
         price,
+        picture: req.file?.path.replace('\\', '/'),
       },
     });
 
@@ -106,6 +119,7 @@ export const updateProduct = async (
       name: result.name,
       description: result.description,
       price: result.price,
+      picture: url + result.picture,
     });
 
   }catch(e){
@@ -126,7 +140,7 @@ export const deleteProduct = async (
     const result = await prisma.product.delete({
       where: {
         id,
-        restaurantId: Number(req.user?.restaurant)
+        restaurantId: Number(req.user?.restaurant),
       },
     });
 
@@ -135,6 +149,7 @@ export const deleteProduct = async (
       name: result.name,
       description: result.description,
       price: result.price,
+      picture: url + result.picture,
     });
   } catch (e) {
     return res.status(400).json({

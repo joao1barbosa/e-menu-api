@@ -1,6 +1,6 @@
 # eMenu-API
 
-This is a simple project that I developed entarely on my own when I was studying API REST. To do so, I decided to create an API that serves an application of online menus. Managing everything, from the login to the list of products.
+This is a simple project that I developed entirely on my own when I was studying API REST. To do so, I decided to create an API that serves an application of online menus. Managing everything, from the login to the list of products.
 
 ## 🧰 Features
 

@@ -53,7 +53,9 @@ export const getRestaurantbyId = async (
         id: true,
         name: true,
         userId: true,
+        Products: true
       },
+
     });
 
     const statusCode = result ? 200 : 404;
@@ -63,7 +65,8 @@ export const getRestaurantbyId = async (
       {
         id: result.id,
         name: result.name,
-        userId: result.userId
+        userId: result.userId,
+        products: result.Products
       }
     :
     {

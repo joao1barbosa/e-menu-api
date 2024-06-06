@@ -2,7 +2,7 @@
 
 This is a simple project that I developed entirely on my own while studying REST APIs. I created an API for an online menu application, managing everything from user login to product listings.
 
-## Table of Contents
+## 📋 Table of Contents
 
 - [Features](#features)
 - [Tech Stack](#tech-stack)
@@ -87,33 +87,33 @@ For production (after building):
 npm run start
 ```
 
-### 📋 API Endpoints
+## 📋 API Endpoints
 
-#### Token Endpoints
+### Token Endpoints
 
 - **POST /token**: Creates a token for a user by validating their credentials (email and password).
 
-#### User Endpoints
+### User Endpoints
 
 - **POST /user**: Create a new user.
 - **PATCH /user**: Update the user using their token to identify them.
 - **DELETE /user**: Delete the user using their token to identify them.
 
-#### Restaurant Endpoints
+### Restaurant Endpoints
 
 - **POST /restaurants**: Create a new restaurant and link it to the user registered in the token.
 - **PATCH /restaurants/**: Update a restaurant using the user ID linked to it in the token to identify it.
 - **DELETE /restaurants/**: Delete a restaurant using the user ID linked to it in the token to identify it.
 - **GET /restaurants/:id**: Get a restaurant by ID.
 
-#### Product Endpoints
+### Product Endpoints
 
 - **POST /products**: Create a new product and link it to the restaurant registered in the token.
 - **PUT /products/:id**: Update the product using the ID passed in the request body and the restaurant ID registered in the token to identify it.
 - **DELETE /products/:id**: Delete the product using the ID passed in the request body and the restaurant ID registered in the token to identify it.
 - **GET /products/:id**: List all the products from a restaurant (by their ID).
 
-### 🤝 Contributing
+## 🤝 Contributing
 
 Contributions are welcome! Please fork the repository and use a feature branch. Pull requests are warmly welcome.
 
@@ -123,7 +123,7 @@ Contributions are welcome! Please fork the repository and use a feature branch. 
 4. Push to the branch (`git push origin feature/AmazingFeature`).
 5. Open a Pull Request.
 
-### 📄 License
+## 📄 License
 
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.do
 

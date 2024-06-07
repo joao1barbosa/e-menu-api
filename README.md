@@ -109,7 +109,7 @@ npm run start
 ### Product Endpoints
 
 - **POST /products**: Create a new product and link it to the restaurant registered in the token.
-- **PUT /products/:id**: Update the product using the ID passed in the request body and the restaurant ID registered in the token to identify it.
+- **PATCH /products/:id**: Update the product using the ID passed in the request body and the restaurant ID registered in the token to identify it.
 - **DELETE /products/:id**: Delete the product using the ID passed in the request body and the restaurant ID registered in the token to identify it.
 - **GET /products/:id**: List all the products from a restaurant (by their ID).
 
